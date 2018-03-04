@@ -1,4 +1,4 @@
-package com.konfer.es;
+package com.konfer.es.com.konfer.es.service.impl;
 
 import ModelBean.Person;
 import Util.Conn.EsClusterConn.ClusterConn;
@@ -6,6 +6,8 @@ import Util.Conn.EsClusterConn.TestUnitConfiguration;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.junit.After;
 import org.junit.Before;
@@ -47,7 +49,8 @@ public class TestIndex
     public void testIndexGet() throws Exception
     {
 
-        service.getByIndexId("8");
+
+        service.getByIndexId("13");
         GetResponse getResponse = service.getGetResponse();
         Map<String, Object> map = getResponse.getSource();
         System.out.println(map);
@@ -85,7 +88,28 @@ public class TestIndex
 
     }
 
+    @Test
+    public void testContentBuilder() throws Exception
+    {
+        XContentBuilder endObject= XContentFactory.jsonBuilder().startObject()
+                .field("name","wang")
+                .field("age",25)
+                .endObject();
+        service.updataIndexByJsonType("13",endObject);
+    }
 
+    @Test
+    public void updateIndex() throws Exception
+    {
+        XContentBuilder builder=XContentFactory.jsonBuilder().startObject().field("age",34).endObject();
+        service.partialUpdataIndex("13",builder);
+    }
+
+    @Test
+    public void deleteIndex() throws Exception
+    {
+        service.delIndex("13");
+    }
 
 
 }

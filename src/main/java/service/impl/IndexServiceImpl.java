@@ -1,9 +1,12 @@
 package service.impl;
 
 import Util.Conn.EsClusterConn.ClusterConn;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentType;
 import service.interfaces.IndexService;
 
@@ -65,14 +68,17 @@ public class IndexServiceImpl implements IndexService
         return null;
     }
 
-    public void delIndex(String id)
+    public DeleteResponse delIndex(String id)
     {
-
+        DeleteResponse deleteResponse=esConnClient.prepareDelete(index,indexType,id).get();
+        return deleteResponse;
     }
 
-    public void updataIndex(String id)
+    public UpdateResponse partialUpdataIndex(String id, XContentBuilder jsonType)
     {
-
+        UpdateResponse updateResponse=new UpdateResponse();
+        updateResponse=esConnClient.prepareUpdate(index, indexType, id).setDoc(jsonType).get();
+        return updateResponse;
     }
 
     public IndexResponse updataIndexByMap(String id, Map map)
@@ -86,6 +92,13 @@ public class IndexServiceImpl implements IndexService
     {
         IndexResponse indexResponse=new IndexResponse();
         indexResponse=esConnClient.prepareIndex(index, indexType, id).setSource(jsonType, XContentType.JSON).get();
+        return indexResponse;
+    }
+
+    public IndexResponse updataIndexByJsonType(String id, XContentBuilder jsonType)
+    {
+        IndexResponse indexResponse=new IndexResponse();
+        indexResponse=esConnClient.prepareIndex(index, indexType, id).setSource(jsonType).get();
         return indexResponse;
     }
 
