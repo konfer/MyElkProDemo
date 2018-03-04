@@ -1,6 +1,6 @@
 package com.konfer.es.com.konfer.es.service.impl;
 
-import ModelBean.Person;
+import com.konfer.es.ModelBean.Person;
 import Util.Conn.EsClusterConn.ClusterConn;
 import Util.Conn.EsClusterConn.TestUnitConfiguration;
 import org.elasticsearch.action.get.GetResponse;
@@ -8,12 +8,9 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.common.xcontent.XContentType;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import service.impl.IndexServiceImpl;
-import service.interfaces.IndexService;
+import com.konfer.es.service.impl.IndexServiceImpl;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

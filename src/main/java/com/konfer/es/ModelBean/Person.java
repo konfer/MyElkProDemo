@@ -1,4 +1,4 @@
-package ModelBean;
+package com.konfer.es.ModelBean;
 
 public class Person
 {

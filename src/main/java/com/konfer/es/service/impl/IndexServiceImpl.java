@@ -1,4 +1,4 @@
-package service.impl;
+package com.konfer.es.service.impl;
 
 import Util.Conn.EsClusterConn.ClusterConn;
 import org.elasticsearch.action.delete.DeleteResponse;
@@ -8,7 +8,7 @@ import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentType;
-import service.interfaces.IndexService;
+import com.konfer.es.service.interfaces.IndexService;
 
 import java.util.Map;
 

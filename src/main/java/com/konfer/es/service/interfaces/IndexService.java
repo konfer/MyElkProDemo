@@ -1,4 +1,4 @@
-package service.interfaces;
+package com.konfer.es.service.interfaces;
 
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexResponse;
