@@ -1,8 +1,9 @@
 package com.konfer.es.com.konfer.es.service.impl;
 
-import com.konfer.es.ModelBean.Person;
+import ModelBean.Person;
 import Util.Conn.EsClusterConn.ClusterConn;
 import Util.Conn.EsClusterConn.TestUnitConfiguration;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -10,10 +11,7 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.junit.Before;
 import org.junit.Test;
-import com.konfer.es.service.impl.IndexServiceImpl;
-
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import service.impl.IndexServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +45,7 @@ public class TestIndex
     {
 
 
-        service.getByIndexId("13");
+        service.getByIndexId("5");
         GetResponse getResponse = service.getGetResponse();
         Map<String, Object> map = getResponse.getSource();
         System.out.println(map);
