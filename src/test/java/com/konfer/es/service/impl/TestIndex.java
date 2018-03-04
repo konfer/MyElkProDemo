@@ -25,7 +25,7 @@ public class TestIndex
     public void testConn() throws Exception
     {
         client = ClusterConn.CLUSTER_CONN.getClientInstance();
-        System.out.print("The connect Node num is: " + client.connectedNodes().size());
+        System.out.println("The connect Node num is: " + client.connectedNodes().size());
 
         service = new IndexServiceImpl();
         service.setIndex(TestUnitConfiguration.testIndex);
@@ -105,5 +105,11 @@ public class TestIndex
         service.delIndex("13");
     }
 
+    @Test
+    public void getIndexNum() throws Exception
+    {
+        long indexNum=service.getIndexCount().getHits().getTotalHits();
+        System.out.println("The num of index is: "+indexNum);
+    }
 
 }

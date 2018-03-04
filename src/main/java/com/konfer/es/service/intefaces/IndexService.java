@@ -2,6 +2,7 @@ package com.konfer.es.service.intefaces;
 
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 
@@ -10,6 +11,8 @@ import java.util.Map;
 public interface IndexService
 {
     public void index(String id);
+
+    public SearchResponse getIndexCount();
 
     public void getByIndexId(String indexId);
 
