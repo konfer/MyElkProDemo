@@ -4,6 +4,8 @@ import com.konfer.es.ModelBean.Person;
 import Util.Conn.EsClusterConn.ClusterConn;
 import Util.Conn.EsClusterConn.TestUnitConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.elasticsearch.action.bulk.BulkRequestBuilder;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -12,6 +14,7 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import org.junit.Before;
 import org.junit.Test;
 import com.konfer.es.service.impl.IndexServiceImpl;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,11 +23,13 @@ public class TestIndex
 {
     private TransportClient client = null;
     private IndexServiceImpl service;
+    private BulkRequestBuilder bulkRequestBuilder;
 
     @Before
     public void testConn() throws Exception
     {
         client = ClusterConn.CLUSTER_CONN.getClientInstance();
+        bulkRequestBuilder=client.prepareBulk();
         System.out.println("The connect Node num is: " + client.connectedNodes().size());
 
         service = new IndexServiceImpl();
@@ -44,10 +49,10 @@ public class TestIndex
     public void testIndexGet() throws Exception
     {
 
-        service.getByIndexId("13");
+        service.getByIndexId("20");
         GetResponse getResponse = service.getGetResponse();
         Map<String, Object> map = getResponse.getSource();
-        System.out.println(map);
+        System.out.println("Searched index infomation is: "+ map);
 
     }
 
@@ -111,5 +116,29 @@ public class TestIndex
         long indexNum=service.getIndexCount().getHits().getTotalHits();
         System.out.println("The num of index is: "+indexNum);
     }
+
+    @Test
+    public void multiUpdate() throws Exception
+    {
+        XContentBuilder builderOne=XContentFactory.jsonBuilder().startObject()
+                .field("name","chen")
+                .field("age",25)
+                .endObject();
+        XContentBuilder builderTwo=XContentFactory.jsonBuilder().startObject()
+                .field("name","li")
+                .field("age",27)
+                .endObject();
+
+        bulkRequestBuilder.add(service.updateRequest("19",builderOne));
+        bulkRequestBuilder.add(service.updateRequest("20",builderTwo));
+
+        BulkResponse bulkItemResponses=bulkRequestBuilder.get();
+
+        if (bulkItemResponses.hasFailures())
+        {
+            System.out.println("Bulk Update Fault");
+        }
+
+    };
 
 }

@@ -4,6 +4,7 @@ import Util.Conn.EsClusterConn.ClusterConn;
 import com.konfer.es.service.intefaces.IndexService;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
@@ -114,5 +115,10 @@ public class IndexServiceImpl implements IndexService
     public void multiGet(String... ids)
     {
 
+    }
+
+    public IndexRequestBuilder updateRequest(String id, XContentBuilder jsonType)
+    {
+        return esConnClient.prepareIndex(index, indexType, id).setSource(jsonType);
     }
 }

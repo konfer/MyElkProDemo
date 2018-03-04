@@ -1,6 +1,8 @@
 package com.konfer.es.service.intefaces;
 
 import org.elasticsearch.action.delete.DeleteResponse;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
@@ -29,5 +31,7 @@ public interface IndexService
     public IndexResponse updataIndexByJsonType(String id, XContentBuilder jsonType);
 
     public void multiGet(String... ids);
+
+    public IndexRequestBuilder updateRequest(String id, XContentBuilder jsonType);
 
 }
