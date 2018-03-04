@@ -4,6 +4,7 @@ import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -14,9 +15,9 @@ public interface IndexService
 {
     public void index(String id);
 
-    public SearchResponse getIndexCount();
 
-    public void getByIndexId(String indexId);
+
+
 
     public Map<String, Object> getMapByIndexId(String indexId);
 

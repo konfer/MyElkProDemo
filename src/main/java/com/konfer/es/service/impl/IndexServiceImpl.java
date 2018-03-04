@@ -6,7 +6,7 @@ import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.action.search.SearchResponse;
+
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -57,13 +57,6 @@ public class IndexServiceImpl implements IndexService
     public void index(String id)
     {
         // indexResponse=esConnClient.prepareIndex(testIndex,testType,id).;
-    }
-
-    public SearchResponse getIndexCount()
-    {
-        SearchResponse searchResponse= new SearchResponse();
-        searchResponse = esConnClient.prepareSearch(index).setTypes(indexType).execute().actionGet();
-        return searchResponse;
     }
 
     public void getByIndexId(String indexId)
