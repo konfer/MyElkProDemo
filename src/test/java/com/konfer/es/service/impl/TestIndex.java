@@ -1,4 +1,4 @@
-package com.konfer.es.com.konfer.es.service.impl;
+package com.konfer.es.service.impl;
 
 import com.konfer.es.ModelBean.Person;
 import Util.Conn.EsClusterConn.ClusterConn;
