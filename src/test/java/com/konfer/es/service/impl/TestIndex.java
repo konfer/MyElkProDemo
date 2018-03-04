@@ -44,7 +44,7 @@ public class TestIndex
     public void testIndexGet() throws Exception
     {
 
-        service.getByIndexId("5");
+        service.getByIndexId("13");
         GetResponse getResponse = service.getGetResponse();
         Map<String, Object> map = getResponse.getSource();
         System.out.println(map);
