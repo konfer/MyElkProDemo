@@ -23,7 +23,6 @@ public class TestIndex
 {
     private TransportClient client = null;
     private IndexServiceImpl service;
-    private SearchIndexServiceImpl searchIndexService;
     private BulkRequestBuilder bulkRequestBuilder;
 
     @Before
@@ -37,9 +36,7 @@ public class TestIndex
         service.setIndex(TestUnitConfiguration.testIndex);
         service.setIndexType(TestUnitConfiguration.testIndexType);
 
-        searchIndexService=new SearchIndexServiceImpl();
-        searchIndexService.setIndex(TestUnitConfiguration.testIndex);
-        searchIndexService.setIndexType(TestUnitConfiguration.testIndexType);
+
     }
 
     @Test
@@ -115,12 +112,6 @@ public class TestIndex
         service.delIndex("13");
     }
 
-    @Test
-    public void getIndexNum() throws Exception
-    {
-        long indexNum=searchIndexService.getSearchResponse().getHits().getTotalHits();
-        System.out.println("The num of index is: "+indexNum);
-    }
 
     @Test
     public void multiUpdate() throws Exception
