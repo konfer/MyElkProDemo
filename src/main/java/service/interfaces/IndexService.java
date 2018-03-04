@@ -1,5 +1,7 @@
 package service.interfaces;
 
+import org.elasticsearch.action.index.IndexResponse;
+
 import java.util.Map;
 
 public interface IndexService
@@ -14,7 +16,9 @@ public interface IndexService
 
     public void updataIndex(String id);
 
-    public void updataIndexByMap(String id, Map map);
+    public IndexResponse updataIndexByMap(String id, Map map);
+
+    public IndexResponse updataIndexByJsonType(String id, byte[] jsonType);
 
     public void multiGet(String... ids);
 

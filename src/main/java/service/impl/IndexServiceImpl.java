@@ -4,6 +4,7 @@ import Util.Conn.EsClusterConn.ClusterConn;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.xcontent.XContentType;
 import service.interfaces.IndexService;
 
 import java.util.Map;
@@ -74,10 +75,20 @@ public class IndexServiceImpl implements IndexService
 
     }
 
-    public void updataIndexByMap(String id, Map map)
+    public IndexResponse updataIndexByMap(String id, Map map)
     {
-        esConnClient.prepareIndex(index, indexType, id).setSource(map).get();
+        IndexResponse indexResponse=new IndexResponse();
+        indexResponse=esConnClient.prepareIndex(index, indexType, id).setSource(map).get();
+        return indexResponse;
     }
+
+    public IndexResponse updataIndexByJsonType(String id, byte[] jsonType)
+    {
+        IndexResponse indexResponse=new IndexResponse();
+        indexResponse=esConnClient.prepareIndex(index, indexType, id).setSource(jsonType, XContentType.JSON).get();
+        return indexResponse;
+    }
+
 
     public void multiGet(String... ids)
     {
