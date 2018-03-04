@@ -1,6 +1,6 @@
 package com.konfer.es.com.konfer.es.service.impl;
 
-import ModelBean.Person;
+import com.konfer.es.ModelBean.Person;
 import Util.Conn.EsClusterConn.ClusterConn;
 import Util.Conn.EsClusterConn.TestUnitConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,7 +11,7 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.junit.Before;
 import org.junit.Test;
-import service.impl.IndexServiceImpl;
+import com.konfer.es.service.impl.IndexServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +43,7 @@ public class TestIndex
     @Test
     public void testIndexGet() throws Exception
     {
-        
+
         service.getByIndexId("5");
         GetResponse getResponse = service.getGetResponse();
         Map<String, Object> map = getResponse.getSource();
