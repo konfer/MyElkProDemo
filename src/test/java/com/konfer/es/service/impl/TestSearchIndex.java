@@ -58,6 +58,26 @@ public class TestSearchIndex
 
     }
 
+    @Test
+    public void testMultiSearchQuery() throws Exception
+    {
+        SearchResponse searchResponse=searchIndexService.getSearchRequestBuilder()
+                //.setQuery(QueryBuilders.multiMatchQuery("20","name","age"))
+                .setQuery(QueryBuilders.queryStringQuery("age:23"))//支持luncence语法
+                .get();
+        SearchHits hits=searchResponse.getHits();
+        long searchIndexNum=hits.getTotalHits();
+        System.out.println("multiSearch found index num is: "+searchIndexNum);
+
+        SearchHit[] searchHits=hits.getHits();
+        for (SearchHit searchHit:searchHits)
+        {
+            System.out.println(searchHit.getSourceAsString());
+        }
+
+    }
+
+
 
 
 }
