@@ -51,7 +51,7 @@ public class TestIndex
     public void testIndexGet() throws Exception
     {
 
-        service.getByIndexId("20");
+        service.getByIndexId("26");
         GetResponse getResponse = service.getGetResponse();
         Map<String, Object> map = getResponse.getSource();
         System.out.println("Searched index infomation is: "+ map);
@@ -62,10 +62,10 @@ public class TestIndex
     public void testIndexUpdata() throws Exception
     {
         HashMap<String, Object> hashMap = new HashMap<String, Object>();
-        hashMap.put("name", "test");
-        hashMap.put("age", "23");
+        hashMap.put("name", "lin");
+        hashMap.put("age", "32");
 
-        service.updataIndexByMap("5", hashMap);
+        service.updataIndexByMap("89", hashMap);
     }
 
     @Test
@@ -93,18 +93,18 @@ public class TestIndex
     public void testContentBuilder() throws Exception
     {
         XContentBuilder endObject= XContentFactory.jsonBuilder().startObject()
-                .field("name","wang")
-                .field("age",25)
+                .field("name","wu")
+                .field("age",18)
                 .endObject();
-        service.updataIndexByJsonType("13",endObject);
+        service.updataIndexByJsonType("99",endObject);
     }
 
-    @Test
-    public void updateIndex() throws Exception
-    {
-        XContentBuilder builder=XContentFactory.jsonBuilder().startObject().field("age",34).endObject();
-        service.partialUpdataIndex("13",builder);
-    }
+//    @Test
+//    public void updateIndex() throws Exception
+//    {
+//        XContentBuilder builder=XContentFactory.jsonBuilder().startObject().field("age",34).endObject();
+//        service.partialUpdataIndex("13",builder);
+//    }
 
     @Test
     public void deleteIndex() throws Exception
@@ -124,9 +124,25 @@ public class TestIndex
                 .field("name","li")
                 .field("age",27)
                 .endObject();
+        XContentBuilder builderThree=XContentFactory.jsonBuilder().startObject()
+                .field("name","你好中国")
+                .field("age",30)
+                .endObject();
+        XContentBuilder builderFour=XContentFactory.jsonBuilder().startObject()
+                .field("name","你好")
+                .field("age",31)
+                .endObject();
+        XContentBuilder builderFive=XContentFactory.jsonBuilder().startObject()
+                .field("name","中国")
+                .field("age",32)
+                .endObject();
+
 
         bulkRequestBuilder.add(service.updateRequest("19",builderOne));
         bulkRequestBuilder.add(service.updateRequest("20",builderTwo));
+        bulkRequestBuilder.add(service.updateRequest("24",builderThree));
+        bulkRequestBuilder.add(service.updateRequest("25",builderFour));
+        bulkRequestBuilder.add(service.updateRequest("26",builderFive));
 
         BulkResponse bulkItemResponses=bulkRequestBuilder.get();
 
